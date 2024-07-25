@@ -26,7 +26,7 @@ def send_email(articles, recipient_email):
     msg = MIMEMultipart()
     msg['From'] = sender_email
     msg['To'] = recipient_email
-    msg['Subject'] = "astro-ph.CO " + today
+    msg['Subject'] = "astro-ph.CO " + str(today)
 
     body = "astro-ph.CO Today\n"
     body += "==============================\n"
