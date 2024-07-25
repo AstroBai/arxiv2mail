@@ -39,7 +39,7 @@ def send_email(articles, recipient_email):
         if int(article['id'][-1])>1 and replace:
             body += "\n\n\n"
             body += "==============================\n"
-            body += "The following are the article replaced today\n"
+            body += "The following are the articles replaced today\n"
             body += "==============================\n"
             replace = False
         body += f"{str(i+1)}. Title: {article['title']}\n"
