@@ -29,9 +29,9 @@ def send_email(articles, recipient_email):
     msg['To'] = recipient_email
     msg['Subject'] = "astro-ph.CO " + str(today)
     
-    body = "Dear follower: \n"
-    body += "Today's arXiv has been updated, here is the report.\n"
-    body += "\n\n"
+    body = "Dear follower: \n\n"
+    body += "Today's arXiv has been updated.\n"
+    body += "\n\n\n"
     body += "==============================\n"
     body += "Daily arXiv astro-ph.CO Articles\n"
     body += "==============================\n"
@@ -46,7 +46,9 @@ def send_email(articles, recipient_email):
         body += f"{str(i+1)}. Title: {article['title']}\n"
         body += f"Link: {article['link']}\n"
         body += "------------------------------\n"
-    
+    body += "\n\n\n"
+    body += "Thanks for following,\n\n"
+    body += "Jiachen"
     msg.attach(MIMEText(body, 'plain'))
 
     server = smtplib.SMTP('smtp.gmail.com', 587)
