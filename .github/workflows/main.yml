@@ -23,6 +23,10 @@ jobs:
       - name: Install dependencies
         run: pip install feedparser
 
-      - name: Run script
+      - name: Send to astrobaijc
         run: python arxiv2mail.py --target astrobaijc@gmail.com
+
+      - name: Send to ffchristy794
+        run: python arxiv2mail.py --target ffchristy794@gmail.com
+      
 
