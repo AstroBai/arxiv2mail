@@ -54,10 +54,6 @@ def send_email(articles, recipient_email):
 def main():
     articles = fetch_arxiv_articles()
     formatted_articles = format_articles_for_github(articles)
-
-    with open('index.md', 'w') as file:
-        file.write(formatted_articles)
-
     send_email(articles, "astrobaijc@gmail.com")
 
 if __name__ == "__main__":
