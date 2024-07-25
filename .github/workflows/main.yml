@@ -2,7 +2,7 @@ name: Update arXiv Articles
 
 on:
   schedule:
-    - cron: '30 8 * * *'  # utc time
+    - cron: '0 9 * * *'  # utc time
   push:
     branches:
       - main
