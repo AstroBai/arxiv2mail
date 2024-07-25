@@ -27,13 +27,23 @@ def send_email(articles, recipient_email):
     msg['From'] = sender_email
     msg['To'] = recipient_email
     msg['Subject'] = "astro-ph.CO " + str(today)
-
-    body = "astro-ph.CO Today\n"
+    
+    body = "Dear follower: \n"
+    body += "Today's arXiv has been updated, here is the report.\n"
+    body += "\n\n"
     body += "==============================\n"
+    body += "Daily arXiv astro-ph.CO Articles\n"
+    body += "==============================\n"
+    replace = True
     for i, article in enumerate(articles):
-        body += f"{str(i+1)}. {article['title']}\n"
-        #body += f"{article['summary']}\n"  # uncomment this line when you need to see the abstract.
-        body += f"{article['link']}\n"
+        if int(article['id'][-1])>1 and replace:
+            body += "\n\n\n"
+            body += "==============================\n"
+            body += "The following are the article replaced today\n"
+            body += "==============================\n"
+            replace = False
+        body += f"{str(i+1)}. Title: {article['title']}\n"
+        body += f"Link: {article['link']}\n"
         body += "------------------------------\n"
     
     msg.attach(MIMEText(body, 'plain'))
