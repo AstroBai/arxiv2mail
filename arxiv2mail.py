@@ -11,14 +11,15 @@ def fetch_arxiv_articles():
     for entry in feed.entries:
         article = {
             'title': entry.title,
+            #'summary': entry.summary, # uncomment this line when you need to see the abstract.
             'link': entry.link
         }
         articles.append(article)
     return articles
 
 def send_email(articles, recipient_email):
-    sender_email = "astrobaijc@gmail.com"
-    password = "xgka vivd yfwb ilpx"
+    sender_email = "astrobaijc@gmail.com" # use your own email here
+    password = "xgka vivd yfwb ilpx" # app password, not your account's password
 
     msg = MIMEMultipart()
     msg['From'] = sender_email
@@ -29,6 +30,7 @@ def send_email(articles, recipient_email):
     body += "==============================\n"
     for article in articles:
         body += f"{article['title']}\n"
+        #body += f"{article['summary']}\n"  # uncomment this line when you need to see the abstract.
         body += f"{article['link']}\n"
         body += "------------------------------\n"
     
