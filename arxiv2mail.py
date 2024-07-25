@@ -28,8 +28,8 @@ def send_email(articles, recipient_email):
     body = "Daily arXiv astro-ph.CO Articles\n"
     body += "==============================\n"
     for article in articles:
-        body += f"Title: {article['title']}\n"
-        body += f"Link: {article['link']}\n"
+        body += f"{article['title']}\n"
+        body += f"{article['link']}\n"
         body += "------------------------------\n"
     
     msg.attach(MIMEText(body, 'plain'))
