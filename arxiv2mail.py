@@ -2,6 +2,7 @@ import feedparser
 import smtplib
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
+import argparse
 
 def fetch_arxiv_articles():
     url = 'http://export.arxiv.org/rss/astro-ph.CO'
@@ -10,21 +11,10 @@ def fetch_arxiv_articles():
     for entry in feed.entries:
         article = {
             'title': entry.title,
-            'authors': entry.author,
-            'summary': entry.summary,
             'link': entry.link
         }
         articles.append(article)
     return articles
-
-def format_articles_for_github(articles):
-    formatted = "# Daily arXiv astro-ph.CO Articles\n\n"
-    for article in articles:
-        formatted += f"## {article['title']}\n"
-        formatted += f"**Authors:** {article['authors']}\n\n"
-        formatted += f"**Summary:** {article['summary']}\n\n"
-        formatted += f"[Read more]({article['link']})\n\n"
-    return formatted
 
 def send_email(articles, recipient_email):
     sender_email = "astrobaijc@gmail.com"
@@ -35,12 +25,12 @@ def send_email(articles, recipient_email):
     msg['To'] = recipient_email
     msg['Subject'] = "Daily arXiv astro-ph.CO Articles"
 
-    body = ""
+    body = "Daily arXiv astro-ph.CO Articles\n"
+    body += "==============================\n"
     for article in articles:
         body += f"Title: {article['title']}\n"
-        body += f"Authors: {article['authors']}\n"
-        body += f"Summary: {article['summary']}\n"
-        body += f"Link: {article['link']}\n\n"
+        body += f"Link: {article['link']}\n"
+        body += "------------------------------\n"
     
     msg.attach(MIMEText(body, 'plain'))
 
@@ -51,11 +41,12 @@ def send_email(articles, recipient_email):
     server.sendmail(sender_email, recipient_email, text)
     server.quit()
 
-def main():
+def main(target_email):
     articles = fetch_arxiv_articles()
-    formatted_articles = format_articles_for_github(articles)
-    send_email(articles, "astrobaijc@gmail.com")
+    send_email(articles, target_email)
 
 if __name__ == "__main__":
-    main()
-
+    parser = argparse.ArgumentParser(description="Send daily arXiv astro-ph.CO articles to a specified email address.")
+    parser.add_argument('--target', dest='target_email', required=True, help='The email address of the target recipient.')
+    args = parser.parse_args()
+    main(args.target_email)
