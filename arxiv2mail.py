@@ -28,8 +28,8 @@ def send_email(articles, recipient_email):
 
     body = "Daily arXiv astro-ph.CO Articles\n"
     body += "==============================\n"
-    for article, i in enumerate(articles):
-        body += f"{str(i)}. {article['title']}\n"
+    for i, article in enumerate(articles):
+        body += f"{str(i+1)}. {article['title']}\n"
         #body += f"{article['summary']}\n"  # uncomment this line when you need to see the abstract.
         body += f"{article['link']}\n"
         body += "------------------------------\n"
