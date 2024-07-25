@@ -3,6 +3,7 @@ import smtplib
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 import argparse
+import datetime
 
 def fetch_arxiv_articles():
     url = 'http://export.arxiv.org/rss/astro-ph.CO'
@@ -20,13 +21,14 @@ def fetch_arxiv_articles():
 def send_email(articles, recipient_email):
     sender_email = "astrobaijc@gmail.com" # use your own email here
     password = "xgka vivd yfwb ilpx" # app password, not your account's password
-
+    
+    today = datetime.date.today()
     msg = MIMEMultipart()
     msg['From'] = sender_email
     msg['To'] = recipient_email
-    msg['Subject'] = "Daily arXiv astro-ph.CO Articles"
+    msg['Subject'] = "astro-ph.CO " + today
 
-    body = "Daily arXiv astro-ph.CO Articles\n"
+    body = "astro-ph.CO Today\n"
     body += "==============================\n"
     for i, article in enumerate(articles):
         body += f"{str(i+1)}. {article['title']}\n"
