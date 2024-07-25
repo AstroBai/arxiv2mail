@@ -13,7 +13,8 @@ def fetch_arxiv_articles():
         article = {
             'title': entry.title,
             #'summary': entry.summary, # uncomment this line when you need to see the abstract.
-            'link': entry.link
+            'link': entry.link,
+            'id': entry.id
         }
         articles.append(article)
     return articles
